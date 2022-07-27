@@ -1,0 +1,19 @@
+{
+    "name": "@pexlab/ngx-chart-engine",
+    "version": "0.0.1",
+    "description": "A empowering interactive charting component library for angular as an extension of front-engine",
+    "license": "MIT",
+    "homepage": "https://pexlab.net/projects/chart-engine",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pexlab/ngx-chart-engine.git"
+    },
+    "peerDependencies": {
+        "@angular/common": "^14.0.0",
+        "@angular/core": "^14.0.0",
+        "@pexlab/ngx-front-engine": "^0.0.47"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    }
+}

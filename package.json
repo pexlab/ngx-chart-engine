@@ -1,37 +1,46 @@
 {
-  "name": "ngx-chart-engine",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^14.0.0",
-    "@angular/common": "^14.0.0",
-    "@angular/compiler": "^14.0.0",
-    "@angular/core": "^14.0.0",
-    "@angular/forms": "^14.0.0",
-    "@angular/platform-browser": "^14.0.0",
-    "@angular/platform-browser-dynamic": "^14.0.0",
-    "@angular/router": "^14.0.0",
-    "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
-  },
-  "devDependencies": {
-    "@angular/cli": "~14.0.5",
-    "@angular/compiler-cli": "^14.0.0",
-    "@types/jasmine": "~4.0.0",
-    "jasmine-core": "~4.1.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.7.2"
-  }
+    "name": "ngx-chart-engine",
+    "version": "0.0.1",
+    "homepage": "https://pexlab.net/projects/chart-engine",
+    "license": "MIT",
+    "scripts": {
+        "serve_docs": "ng serve --host 0.0.0.0 --port 42002",
+        "serve_lib": "ng build --configuration development --project lib --watch",
+        "build_docs": "ng build --configuration production --project docs --base-href https://www.pexlab.net/projects/chart-engine/ --deploy-url https://www.pexlab.net/projects/chart-engine/",
+        "build_lib": "ng build --configuration production --project lib",
+        "build_and_serve": "ng build --configuration development --project lib && ng serve --host 0.0.0.0",
+        "build_and_pack": "ng build --configuration production && cd dist/ngx-chart-engine && npm pack"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "^14.0.0",
+        "@angular/common": "^14.0.0",
+        "@angular/compiler": "^14.0.0",
+        "@angular/core": "^14.0.0",
+        "@angular/forms": "^14.0.0",
+        "@angular/platform-browser": "^14.0.0",
+        "@angular/platform-browser-dynamic": "^14.0.0",
+        "@angular/router": "^14.0.0",
+        "@types/lodash": "^4.14.182",
+        "angular-svg-icon": "^14.0.0",
+        "ngx-markdown": "^14.0.1",
+        "rxjs": "~7.5.0",
+        "tslib": "^2.3.0",
+        "zone.js": "~0.11.4"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^14.0.7",
+        "@angular/cli": "~14.0.5",
+        "@angular/compiler-cli": "^14.0.0",
+        "@pexlab/ngx-front-engine": "^0.0.47",
+        "@types/jasmine": "~4.0.0",
+        "jasmine-core": "~4.1.0",
+        "karma": "~6.3.0",
+        "karma-chrome-launcher": "~3.1.0",
+        "karma-coverage": "~2.2.0",
+        "karma-jasmine": "~5.0.0",
+        "karma-jasmine-html-reporter": "~1.7.0",
+        "ng-packagr": "^14.0.0",
+        "typescript": "~4.7.2"
+    }
 }
