@@ -66,7 +66,7 @@ the [repository on GitHub](https://github.com/pexlab/ngx-chart-engine)!
 
 You can also engage with us and the community on our Discord located here: https://discord.gg/GSmDjqeruh
 
-[![npm package](https://img.shields.io/discord/894588904626356274?label=Community%20Discord&logo=Discord&style=social)](https://discord.gg/GSmDjqeruh)
+[![Community Discord](https://img.shields.io/discord/894588904626356274?label=Community%20Discord&logo=Discord&style=social)](https://discord.gg/GSmDjqeruh)
 
 ___
 
