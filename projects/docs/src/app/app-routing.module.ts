@@ -4,6 +4,7 @@ import { GettingStartedComponent } from './pages/getting-started/getting-started
 import { IntroductionComponent } from './pages/introduction/introduction.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ShowcaseSidebarComponent } from './pages/showcase/sidebar/showcase-sidebar.component';
+import {PartOfAWholeComponent} from "./pages/showcase/part-of-a-whole/part-of-a-whole.component";
 
 @NgModule(
     {
@@ -28,9 +29,13 @@ import { ShowcaseSidebarComponent } from './pages/showcase/sidebar/showcase-side
                             },
                             {
                                 path      : '',
-                                redirectTo: '/showcase/line-chart',
+                                redirectTo: '/showcase/part-of-a-whole',
                                 pathMatch : 'full'
-                            }
+                            },
+                          {
+                            path: 'part-of-a-whole',
+                            component: PartOfAWholeComponent
+                          }
                         ]
                     },
                     {
