@@ -1,7 +1,12 @@
-svg.lollipop{
-  background-color: #FAFAF5;
+svg.lollipop {
+  background-color : #fafaf5;
 
-  & > path.horizontalLine{
-    stroke: #D1D1D1;
+  & > path.horizontalLine {
+    stroke : #d1d1d1;
+  }
+
+  & > path.seasonBarConnector {
+    stroke         : #666666;
+    stroke-linecap : round;
   }
 }

@@ -1,61 +1,132 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import {SVGPath} from "../../../util/svg.util";
-import { LollipopEntry } from './lollipopentry';
+import { SVGPath } from '../../../util/svg.util';
+import { LollipopSeason } from './lollipopobjects';
 
-@Component({
-  selector: 'fe-lollipop-timeseries',
+@Component( {
+  selector   : 'fe-lollipop-timeseries',
   templateUrl: './lollipop-timeseries.component.html',
-  styleUrls: ['./lollipop-timeseries.component.scss']
-})
+  styleUrls  : [ './lollipop-timeseries.component.scss' ]
+} )
 export class LollipopTimeseriesComponent implements OnInit {
 
-  public horizontalLines: String[] = [];
+  public horizontalLines: String[]         = [];
+  public seasonBars: Map<String, String>   = new Map<String, String>();
+  public episodeLines: Map<String, String> = new Map<String, String>();
+  public seasonBarConnectors: String[]     = [];
+  public episodeCircles: Map<String, String> = new Map<String, String>();
 
-  public svgWidth = 1500;
+  public svgWidth  = 1500;
   public svgHeight = 900;
-  
+
+  public chartWidth  = 1323.3;
+  public chartHeight = 724.6;
+
+  public chartPaddingLR     = 19;
+  public seasonBarMarginLR  = 1;
+  public seasonBarPaddingLR = 10.6;
+
+  public voteCircleMinDiameter = 4.6;
+  public voteCircleMaxDiameter = 10.6;
+
+  public episodeLineWidth = 1.6;
+
+  public seasonBarHeight = 7.3;
+
+  public range       = [ 0, 10 ];
+  public ratingSteps = 10;
+
   @Input()
-  public entries!: LollipopEntry[];
-  
-  @Input()
-  public yRange!: number[];
+  public seasons!: LollipopSeason[];
 
-  constructor(public hostElement: ElementRef<HTMLElement>) {
-    
-    const rangeMin = Math.min(this.yRange[0], this.yRange[1]);
-    const rangeMax = Math.max(this.yRange[0], this.yRange[1]);
-
-    const stepSize = Math.round((rangeMax - rangeMin) / 8);
-    
-    const keys = 8
-    for (let i = 0; i < keys; i++) {
-      const y = 84.3 + (724.3 / (keys - 1) * i)
-
-      const path = new SVGPath();
-      path.moveTo(101.6, y)
-      path.horizontalLineTo(1425.3)
-
-      this.horizontalLines.push(path.end())
-    }
-    
-    const entryWidth = 1323.7 / this.entries.length;
-  
-    for ( let i = 0; i < this.entries.length; i++ ) {
-        const entry = this.entries[i];
-      
-        const path = new SVGPath();
-        const x = 101.6 + (entryWidth * i);
-        path.moveTo(101.6, 84.3)
-        path.horizontalLineTo(entryWidth)
-        path.verticalLineTo(entry.yAverage)
-        path.horizontalLineTo(entryWidth)
-        path.verticalLineTo(84.3)
-        path.end()
-    }
-
+  constructor( public hostElement: ElementRef<HTMLElement> ) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    const rangeMin = Math.min( this.range[ 0 ], this.range[ 1 ] );
+    const rangeMax = Math.max( this.range[ 0 ], this.range[ 1 ] );
+
+    const stepSize = this.chartHeight / (this.ratingSteps - 1);
+
+    const ratingLineYStart = ( this.svgHeight / 2 ) - ( this.chartHeight / 2 );
+    const ratingLineYEnd   = ( this.svgHeight / 2 ) + ( this.chartHeight / 2 );
+
+    const ratingLineXStart = ( this.svgWidth / 2 ) - ( this.chartWidth / 2 );
+    const ratingLineXEnd   = ( this.svgWidth / 2 ) + ( this.chartWidth / 2 );
+
+    //horizontal rating lines
+    for ( let i = 0; i < this.ratingSteps; i++ ) {
+
+      const y = ratingLineYStart + ( this.chartHeight / ( this.ratingSteps - 1 ) * i );
+
+      const path = new SVGPath();
+      path.moveTo( ratingLineXStart, y );
+      path.horizontalLineTo( ratingLineXEnd );
+
+      this.horizontalLines.push( path.end() );
+    }
+
+    const seasonBarXStart = ratingLineXStart + this.chartPaddingLR;
+    const seasonBarWidth  = ( ( ( ratingLineXEnd - ratingLineXStart ) - ( 2 * this.chartPaddingLR ) ) / this.seasons.length );
+
+    let previousCy: number;
+    let previousXEnd: number;
+
+    //season bars
+    for ( let i = 0; i < this.seasons.length; i++ ) {
+      const season = this.seasons[ i ];
+
+      const x  = seasonBarXStart + ( seasonBarWidth * i ) + ( this.seasonBarMarginLR * i );
+      const cy = ratingLineYEnd - ( stepSize * season.seasonAverage );
+
+      const path = new SVGPath();
+      path.moveTo( x, cy - ( this.seasonBarHeight / 2 ) );
+      path.relative();
+      path.verticalLineTo( this.seasonBarHeight );
+      path.horizontalLineTo( seasonBarWidth );
+      path.verticalLineTo( -this.seasonBarHeight );
+      path.close();
+
+      this.seasonBars.set( path.end(), season.seasonColor );
+
+      //season bar connector
+      if ( i != 0 ) {
+        const connectorPath = new SVGPath();
+        connectorPath.moveTo( previousXEnd! + ( ( this.seasonBarMarginLR / 2 ) ), previousCy! );
+        connectorPath.verticalLineTo( cy );
+
+        this.seasonBarConnectors.push( connectorPath.end() );
+      }
+
+      previousCy   = cy;
+      previousXEnd = x + seasonBarWidth;
+
+      const episodeXStart   = x + this.seasonBarPaddingLR;
+      const episodeStepSize = ( seasonBarWidth - ( this.seasonBarPaddingLR * 2 ) ) / ( season.episodes.length - 1 );
+
+      const episodeCircleDiameterRange = (this.voteCircleMaxDiameter - this.voteCircleMinDiameter);
+
+      //episode lines
+      for ( let j = 0; j < season.episodes.length; j++ ) {
+        const episode = season.episodes[ j ];
+
+        const episodeX    = episodeXStart + ( episodeStepSize * j );
+        const episodeYEnd = ratingLineYEnd - ( stepSize * episode.rating );
+
+        const episodePath = new SVGPath();
+        episodePath.moveTo( episodeX, cy );
+        episodePath.verticalLineTo( episodeYEnd );
+
+        this.episodeLines.set( episodePath.end(), season.episodeColor );
+
+        const voteCircleDiameter = this.voteCircleMinDiameter + (episodeCircleDiameterRange * 1);
+
+        const episodeCirclePath = new SVGPath();
+        episodeCirclePath.moveTo(episodeX, episodeYEnd);
+        episodeCirclePath.circle(voteCircleDiameter);
+
+        this.episodeCircles.set(episodeCirclePath.end(), season.episodeColor);
+      }
+    }
   }
 
 }

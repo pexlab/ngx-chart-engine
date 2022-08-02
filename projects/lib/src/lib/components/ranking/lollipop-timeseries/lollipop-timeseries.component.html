@@ -2,5 +2,14 @@
 
   <path class="horizontalLine" *ngFor="let path of horizontalLines" [attr.d]="path" [style.stroke-width]="1.6" [attr.fill]="'transparent'"></path>
 
+  <path class="seasonBarConnector" *ngFor="let path of seasonBarConnectors" [attr.d]="path" [style.stroke-width]="seasonBarMarginLR" [attr.fill]="'transparent'"></path>
+
+  <path class="episodeLine" *ngFor="let episode of episodeLines | keyvalue let i = index" [attr.d]="episode.key" [style.stroke]="episode.value" [style.stroke-width]="episodeLineWidth" [attr.fill]="'transparent'"></path>
+
+  <path class="seasonBar" *ngFor="let season of seasonBars | keyvalue let i = index" [attr.d]="season.key" [attr.fill]="season.value"></path>
+
+  <path class="episodeCircle" *ngFor="let circle of episodeCircles | keyvalue let i = index" [attr.d]="circle.key" [attr.fill]="circle.value"></path>
+
+
 
 </svg>
