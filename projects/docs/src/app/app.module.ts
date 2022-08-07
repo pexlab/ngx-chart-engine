@@ -12,6 +12,7 @@ import { GettingStartedComponent } from './pages/getting-started/getting-started
 import { IntroductionComponent } from './pages/introduction/introduction.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ShowcaseSidebarComponent } from './pages/showcase/sidebar/showcase-sidebar.component';
+import { TestComponent } from './pages/showcase/test/test.component';
 
 @NgModule(
     {
@@ -21,7 +22,8 @@ import { ShowcaseSidebarComponent } from './pages/showcase/sidebar/showcase-side
             NotFoundComponent,
             IntroductionComponent,
             GettingStartedComponent,
-            ShowcaseSidebarComponent
+            ShowcaseSidebarComponent,
+            TestComponent
         ],
         
         imports: [
