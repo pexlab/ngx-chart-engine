@@ -1,19 +1,64 @@
 {
     "name": "@pexlab/ngx-chart-engine",
-    "version": "0.0.1",
-    "description": "A empowering interactive charting component library for angular as an extension of front-engine",
-    "license": "MIT",
-    "homepage": "https://pexlab.net/projects/chart-engine",
+    "author": {
+        "name": "PexLab",
+        "email": "opensource@pexlab.net",
+        "url": "https://www.pexlab.net"
+    },
+    "contributors": [
+        {
+            "name": "David van der Sluijs",
+            "email": "david.van-der-sluijs@pexlab.net",
+            "url": "https://www.slatedave.de"
+        },
+        {
+            "name": "Philipp Glaubitz",
+            "email": "philipp.glaubitz@pexlab.net",
+            "url": "https://github.com/PhilippGlaubitz"
+        },
+        {
+            "name": "Robin Gaši",
+            "email": "robin.gasi@pexlab.net",
+            "url": "https://github.com/RobinGasi"
+        }
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/pexlab/ngx-chart-engine.git"
     },
+    "bugs": {
+        "url": "https://github.com/pexlab/ngx-chart-engine/issues"
+    },
+    "funding": [
+        {
+            "type": "individual",
+            "url": "https://www.buymeacoffee.com/slatedave"
+        }
+    ],
+    "version": "0.0.1",
+    "license": "MIT",
+    "homepage": "https://pexlab.net/projects/chart-engine",
     "peerDependencies": {
-        "@angular/common": "^14.0.0",
-        "@angular/core": "^14.0.0",
-        "@pexlab/ngx-front-engine": "^0.0.47"
+        "@angular/common": ">=15.0.0",
+        "@angular/core": ">=15.0.0",
+        "rxjs": ">=6.6.3",
+        "angular-svg-icon": "^15.0.0",
+        "zod": "^3.20.2",
+        "@pexlab/ngx-front-engine": "^0.0.72"
     },
     "dependencies": {
-        "tslib": "^2.3.0"
+        "@angular/cdk": "^15.0.3",
+        "@fontsource/anonymous-pro": "^4.5.9",
+        "@fontsource/architects-daughter": "^4.5.9",
+        "@fontsource/baloo-bhaina-2": "^4.5.11",
+        "@fontsource/jost": "^4.5.12",
+        "@fontsource/pangolin": "^4.5.9",
+        "@fontsource/rajdhani": "^4.5.10",
+        "@fontsource/roboto": "^4.5.8",
+        "@fontsource/syncopate": "^4.5.8",
+        "tslib": "^2.3.0",
+        "ngx-markdown": "^15.0.0",
+        "marked": "^4.2.12",
+        "prismjs": "^1.29.0"
     }
 }

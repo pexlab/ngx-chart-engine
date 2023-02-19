@@ -68,8 +68,8 @@
                         ],
                         "styles": [
                             "projects/docs/src/styles.scss",
-                            "./node_modules/@pexlab/ngx-front-engine/assets/fe-styles/root.scss",
-                            "node_modules/prismjs/themes/prism-tomorrow.css"
+                            "node_modules/@pexlab/ngx-front-engine/assets/fe-styles/root.scss",
+                            "node_modules/prismjs/themes/prism-okaidia.css"
                         ],
                         "scripts": [
                             "node_modules/marked/marked.min.js",
@@ -78,20 +78,26 @@
                             "node_modules/prismjs/components/prism-css.js",
                             "node_modules/prismjs/components/prism-diff.js",
                             "node_modules/prismjs/components/prism-bash.js"
-                        ]
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "node_modules",
+                                "dist"
+                            ]
+                        }
                     },
                     "configurations": {
                         "production": {
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "1.5mb",
+                                    "maximumError": "2mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "4kb",
+                                    "maximumError": "8kb"
                                 }
                             ],
                             "fileReplacements": [
